@@ -1,0 +1,43 @@
+ /*Fuentes */
+
+/*Titulare*/
+h1, h2, h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #212529;
+}
+
+/*Subtitulares y titulares secundarios*/
+ h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #212529;
+}
+
+/*general*/
+p, a, span, li, input, textarea, button {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+/*texto secundario*/
+small {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: #6c757d;
+}
+
+/*enlace*/
+a {
+    text-decoration: none;
+    color: #0d6efd;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
