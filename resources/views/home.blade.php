@@ -33,7 +33,7 @@
 			
 			<div class="row">
 				@foreach ($reviews as $review)
-					<div class="col-md-4 mb-4">
+					<div class="col-12 mb-4">
 						<div class="card p-3 h-100">
 							<div class="d-flex">
 								<!-- Imagen a la izquierda -->
