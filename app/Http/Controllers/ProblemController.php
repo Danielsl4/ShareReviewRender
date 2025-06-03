@@ -50,7 +50,7 @@
 				abort(403); // o redirigir con mensaje si prefieres
 			}
 			
-			$problems = Problem::with('user')->latest()->paginate(10);
+			$problems = Problem::with('user')->latest()->paginate(18);
 			
 			return view('problem.admin', ['problems' => $problems]);
 		}

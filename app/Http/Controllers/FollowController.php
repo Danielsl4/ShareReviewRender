@@ -18,7 +18,7 @@
 			$activities = Activity::whereIn('user_id', $followedUserIds)
 				->orderByDesc('created_at')
 				->with('user') // para acceder a la foto y nombre
-				->paginate(10);
+				->paginate(18);
 			
 			return view('following', [
 				'activities' => $activities,

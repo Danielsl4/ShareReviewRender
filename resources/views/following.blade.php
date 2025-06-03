@@ -16,29 +16,39 @@
 							style="width: 50px; height: 50px; object-fit: cover;">
 					
 					<div>
-						<a href="{{ route('users.show', ['id' => $activity->user->id]) }}"
-						   class="fw-semibold text-decoration-none text-dark">
-							{{ $activity->user->name }}
-						</a>
-						
-						<span class="text-muted">
+						<p class="mb-1">
+							<a href="{{ route('users.show', $activity->user->id) }}" class="fw-semibold text-decoration-none text-dark">
+								{{ $activity->user->name }}
+							</a>
+							
 							{{ $activity->action_type }}
-						</span>
-						
-						@if ($activity->content)
-							<span> - <strong>{{ $activity->content->title }}</strong></span>
-						@endif
-						
-						@if ($activity->target_user_id)
-							@php
-								$target = \App\Models\User::find($activity->target_user_id);
-							@endphp
-							@if ($target)
-								<span> → <a href="{{ route('users.show', ['id' => $target->id]) }}" class="text-decoration-none">
-									{{ $target->name }}
-								</a></span>
+							
+							@if ($activity->content)
+								sobre
+								<a href="{{ route('explorer.show', ['type' => $activity->content->type, 'id' => $activity->content->external_id]) }}"
+								   class="text-decoration-none">
+									{{ $activity->content->title ?? 'Contenido no disponible' }}
+								</a>
 							@endif
-						@endif
+							
+							@if ($activity->action_type === 'publicó una reseña' && $activity->review)
+								–
+								<a href="{{ route('review.show', $activity->review->id) }}" class="text-decoration-none text-primary">
+									ver reseña
+								</a>
+							@endif
+							
+							@if ($activity->target_user_id)
+								@php $target = \App\Models\User::find($activity->target_user_id); @endphp
+								@if ($target)
+									→
+									<a href="{{ route('users.show', ['id' => $target->id]) }}" class="text-decoration-none">
+										{{ $target->name }}
+									</a>
+								@endif
+							@endif
+						</p>
+						
 						
 						<div class="text-muted small">
 							{{ $activity->created_at->diffForHumans() }}

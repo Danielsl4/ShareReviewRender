@@ -33,11 +33,11 @@
 			
 			<div class="row">
 				@foreach ($reviews as $review)
-					<div class="col-12 mb-4">
+					<div class="col-12 col-sm-6 col-md-4 mb-4">
 						<div class="card p-3 h-100">
-							<div class="d-flex">
+							<div class="d-flex flex-column flex-md-row">
 								<!-- Imagen a la izquierda -->
-								<div style="width: 33%;" class="pe-3 d-flex align-items-center justify-content-center">
+								<div class="pe-md-3 mb-3 mb-md-0 d-flex align-items-center justify-content-center" style="width: 100%; max-width: 90px;">
 									<div style="width: 90px; aspect-ratio: 2 / 3; overflow: hidden; border-radius: 0.5rem;">
 										@if ($review->content?->cover)
 											<img src="{{ $review->content->cover }}"
@@ -47,7 +47,7 @@
 									</div>
 								</div>
 								
-								<div style="width: 66%;" class="d-flex flex-column justify-content-between">
+								<div class="flex-grow-1 d-flex flex-column justify-content-between">
 									<h5 class="fw-bold mb-1">
 										<a href="{{ route('explorer.show', ['type' => $review->content->type, 'id' => $review->content->external_id]) }}"
 										   class="text-decoration-underline text-dark">

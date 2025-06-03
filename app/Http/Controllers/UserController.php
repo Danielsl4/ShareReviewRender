@@ -12,7 +12,7 @@
 		public function show($id) {
 			$user = User::findOrFail($id);
 			
-			$reviews = $user->reviews()->latest()->paginate(9);
+			$reviews = $user->reviews()->latest()->paginate(18);
 			$totalReviews = $user->reviews()->count();
 			$averageRating = $user->reviews()->avg('rating');
 			
@@ -95,7 +95,7 @@
 				->orWhere('target_user_id', $userId)
 				->with(['user', 'targetUser', 'review', 'content'])
 				->latest()
-				->paginate(10);
+				->paginate(18);
 			
 			return view('activity', ['activities' => $activities]);
 		}
