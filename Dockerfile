@@ -26,4 +26,4 @@ RUN chown -R www-data:www-data /var/www/html \
 EXPOSE 80
 
 # Inicia el servidor con Laravel
-CMD /bin/sh -c "cp database/database.sqlite /data/database.sqlite && php artisan migrate --force && php -S 0.0.0.0:80 -t public"
+CMD /bin/sh -c "mkdir -p /data && cp database/database.sqlite /data/database.sqlite && php artisan migrate --force && php -S 0.0.0.0:80 -t public"
