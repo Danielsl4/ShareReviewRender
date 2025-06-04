@@ -64,7 +64,7 @@
 							@enderror
 						</div>
 						
-						<div class="d-flex justify-content-end">
+						<div class="d-flex justify-content-center justify-content-sm-end">
 							<button type="submit" class="btn btn-dark px-4">
 								Crear cuenta
 							</button>

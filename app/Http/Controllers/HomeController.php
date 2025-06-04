@@ -28,7 +28,7 @@
 			}
 			
 			return view('home', [
-				'reviews' => $reviews->paginate(18),
+				'reviews' => $reviews->paginate(18)->onEachSide(0),
 			]);
 		}
 		

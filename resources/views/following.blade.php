@@ -1,6 +1,6 @@
 <x-layout>
 	<div class="container py-4">
-		<h1 class="h4 mb-4">Actividad de usuarios que sigues</h1>
+		<h1 class="h4 mb-4 text-center text-sm-start">Actividad de usuarios que sigues</h1>
 		
 		@if ($activities->isEmpty())
 			<p>No hay actividad reciente.</p>

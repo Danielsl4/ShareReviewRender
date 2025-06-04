@@ -1,6 +1,6 @@
 <x-layout>
 	<div class="container py-4">
-		<h1 class="mb-4">Explorar contenidos</h1>
+		<h1 class="mb-4 text-center text-sm-start">Explorar contenidos</h1>
 		
 		<div class="d-flex justify-content-center gap-3 flex-wrap mb-4">
 			<a href="{{ route('explorer') }}" class="btn btn-outline-secondary px-4 py-3 {{ request('type') === null ? 'active' : '' }}">

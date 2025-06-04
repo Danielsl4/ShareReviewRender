@@ -118,7 +118,7 @@
 				@endforeach
 			</div>
 			<div class="d-flex justify-content-center mt-4">
-				{{ $reviews->appends(request()->query())->links('pagination::bootstrap-4') }}
+				{{ $reviews->appends(request()->query())->onEachSide(0)->links('pagination::bootstrap-4') }}
 			</div>
 		@endif
 	</div>
