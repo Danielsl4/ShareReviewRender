@@ -8,6 +8,8 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9873526213939864"
+     crossorigin="anonymous"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
