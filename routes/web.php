@@ -9,6 +9,7 @@
 	use App\Http\Controllers\UserController;
 	use App\Http\Controllers\ValorationController;
 	use App\Http\Controllers\HomeController;
+	use App\Http\Middleware\HandleDatabaseErrors;
 	use Illuminate\Support\Facades\Route;
 
 // Página principal
@@ -28,9 +29,11 @@
 		Route::get('/following', [FollowController::class, 'index'])->name('following');
 		
 		// Publicar reseña
-		Route::get('/publish/create', [ReviewController::class, 'create'])->name('publish.create');
-		Route::post('/publish', [ReviewController::class, 'store'])->name('publish.store');
-		Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+		Route::middleware([HandleDatabaseErrors::class])->group(function () {
+			Route::get('/publish/create', [ReviewController::class, 'create'])->name('publish.create');
+			Route::post('/publish', [ReviewController::class, 'store'])->name('publish.store');
+			Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+		});
 		
 		// Votar una reseña
 		Route::post('/reviews/{id}/valoration', [ValorationController::class, 'vote'])->name('reviews.valoration');

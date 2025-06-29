@@ -6,6 +6,8 @@
 	use App\Models\Content;
 	use App\Models\Review;
 	use Illuminate\Http\Request;
+	use Illuminate\Support\Facades\DB;
+	use Illuminate\Support\Facades\Log;
 	
 	class ReviewController extends Controller {
 		public function create(Request $request) {
@@ -35,35 +37,49 @@
 				'rating' => 'required|integer|between:0,10',
 			]);
 			
-			$content = Content::firstOrCreate(
-				[
-					'external_id' => $request->input('external_id'),
-					'type' => $request->input('type'),
-				],
-				[
-					'title' => $request->input('title'),
-					'author' => $request->input('author'),
-					'description' => $request->input('description'),
-					'cover' => $request->input('cover'),
-					'release_date' => $request->input('release_date'),
-				]
-			);
+			DB::beginTransaction();  // Comienza la transacción
 			
-			$review = Review::create([
-				'content_id' => $content->id,
-				'user_id' => auth()->id(),
-				'body' => $request->input('body'),
-				'rating' => $request->input('rating'),
-			]);
-			
-			Activity::create([
-				'user_id' => auth()->id(),
-				'action_type' => 'publicó una reseña',
-				'content_id' => $content->id,
-				'review_id' => $review->id,
-			]);
-			
-			return redirect()->route('home')->with('success', 'Reseña publicada con éxito.');
+			try {
+				// Intentar crear el contenido (Content)
+				$content = Content::firstOrCreate(
+					[
+						'external_id' => $request->input('external_id'),
+						'type' => $request->input('type'),
+					],
+					[
+						'title' => $request->input('title'),
+						'author' => $request->input('author'),
+						'description' => $request->input('description'),
+						'cover' => $request->input('cover'),
+						'release_date' => $request->input('release_date'),
+					]
+				);
+				
+				// Crear la reseña (Review)
+				$review = Review::create([
+					'content_id' => $content->id,
+					'user_id' => auth()->id(),
+					'body' => $request->input('body'),
+					'rating' => $request->input('rating'),
+				]);
+				
+				// Registrar la actividad (Activity)
+				Activity::create([
+					'user_id' => auth()->id(),
+					'action_type' => 'publicó una reseña',
+					'content_id' => $content->id,
+					'review_id' => $review->id,
+				]);
+				
+				DB::commit();  // Si todo ha ido bien, se confirma la transacción
+				
+				return redirect()->route('home')->with('success', 'Reseña publicada con éxito.');
+			} catch (\Exception $e) {
+				DB::rollBack();  // Si algo sale mal, revertir todo lo realizado en la transacción
+				Log::error('Error al guardar la reseña: ' . $e->getMessage());  // Registra el error
+				
+				return redirect()->back()->withErrors(['error' => 'Hubo un error al guardar la reseña. Por favor, inténtalo de nuevo.']);
+			}
 		}
 		
 		public function show(Review $review) {
